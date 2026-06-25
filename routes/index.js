@@ -25,10 +25,15 @@ router.post('/', function (req, res, next) {
       return
     }
     console.log('success');
-  });  
+  });
   const todo = req.body.add;
-  todos.push(todo);
-  res.redirect('/');
+  connection.query(
+    `insert into tasks (user_id, content) values (1, '${todo}');`,
+    (error, results) => {
+      console.log(error);
+      res.redirect('/');
+    }
+  );
 });
 
 module.exports = router;
