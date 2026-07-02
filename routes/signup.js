@@ -5,10 +5,9 @@ const knex = require('../db/knex');
 router.get('/', function (req, res, next) {
   const userId = req.session.userid;
   const isAuth = Boolean(userId);
-  
-  isAuth: isAuth,
 
   res.render('signup', {
+     isAuth: isAuth,
     title: 'Sign up',
   });
 });
