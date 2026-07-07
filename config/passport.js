@@ -7,9 +7,15 @@ const cookieSession = require("cookie-session");
 const secret = "secretCuisine123";
 
 module.exports = function (app) {
-  passport.serializeUser(function (user, done) {
-    done(null, user.id);
-  });
+  passport.deserializeUser(async function (id, done) {
+ console.log("deserializeUser");
+ try {
+    const user = await User.findById(id);
+    done(null, user);
+ } catch (error) {
+    done(error, null);
+ }
+});
 
   passport.deserializeUser(async function (id, done) {
     try {
